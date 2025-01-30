@@ -1,0 +1,19 @@
+{
+	"name": "@repo/tools",
+	"version": "1.0.0",
+	"private": true,
+
+	"scripts": {
+		"lint": "biome check --write"
+	},
+
+	"imports": {
+		"#*": "./src/*"
+	},
+
+	"exports": {
+		"./typescript/base": "./typescript/base.json",
+		"./typescript/react": "./typescript/react.json",
+		"./biome": "./biome/biome.jsonc"
+	}
+}
