@@ -1,4 +1,5 @@
 import type { JSX } from 'react';
+import { Card } from '#card.js';
 
 export function Code({
 	children,
@@ -9,8 +10,12 @@ export function Code({
 }): JSX.Element {
 	return (
 		<code className={className}>
-			<p>This is parent</p>
+			<p>This is CODE parenteeeeee</p>
+
 			<p>This for children: {children}</p>
+			<Card title={''} href={''}>
+				<p>This is CODE child</p>
+			</Card>
 		</code>
 	);
 }

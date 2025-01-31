@@ -10,5 +10,6 @@
 	"explorer.confirmDelete": false,
 	"explorer.confirmDragAndDrop": false,
 	"typescript.updateImportsOnFileMove.enabled": "always",
-	"javascript.updateImportsOnFileMove.enabled": "always"
+	"javascript.updateImportsOnFileMove.enabled": "always",
+	"typescript.preferences.importModuleSpecifier": "non-relative"
 }

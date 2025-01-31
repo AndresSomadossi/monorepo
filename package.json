@@ -1,19 +1,19 @@
 {
-  "name": "@repo/root",
-  "private": true,
-  "scripts": {
-    "build": "turbo build",
-    "dev": "turbo dev",
-    "lint": "turbo lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
-  },
-  "devDependencies": {
-    "@biomejs/biome": "^1.9.3",
-    "turbo": "^2.3.4",
-    "typescript": "5.7.3"
-  },
-  "packageManager": "pnpm@10.0.0",
-  "engines": {
-    "node": ">=22.13.0"
-  }
+	"name": "@repo/root",
+	"private": true,
+	"scripts": {
+		"build": "turbo build",
+		"dev": "turbo dev",
+		"lint": "turbo lint",
+		"format": "prettier --write \"**/*.{ts,tsx,md}\""
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^1.9.3",
+		"turbo": "^2.3.4",
+		"typescript": "5.7.3"
+	},
+	"packageManager": "pnpm@10.0.0",
+	"engines": {
+		"node": ">=22.13.0"
+	}
 }

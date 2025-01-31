@@ -1,13 +1,13 @@
 import { Button } from '@repo/ui-components/button';
-import { Double } from '@repo/ui-components/double';
-import { Title } from './Title';
+import { Title } from '#components/title.tsx';
 
 const App = () => {
 	return (
 		<div className="content">
 			<Title />
-			<Button appName="any">Click me!</Button>
-			<Double />
+			<Button className=" bg-red-400" appName="any">
+				Click me!!
+			</Button>
 		</div>
 	);
 };

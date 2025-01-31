@@ -2,9 +2,12 @@
 	"name": "@repo/ui-components",
 	"version": "1.0.0",
 	"private": true,
+	"type": "module",
 	"scripts": {
 		"lint": "biome check --write",
 		"check": "tsc --noEmit",
+		"dev": "tsc && tsc --watch",
+		"build": "tsc",
 
 		"generate:component": "turbo gen react-component"
 	},
@@ -23,13 +26,16 @@
 	},
 
 	"imports": {
-		"#*": "./src/*"
+		"#*": "./dist/*"
 	},
-
 	"exports": {
-		"./button": "./src/button.tsx",
-		"./card": "./src/card.tsx",
-		"./double": "./src/double.tsx",
-		"./code": "./src/code.tsx"
+		"./button": {
+			"types": "./src/button.tsx",
+			"default": "./dist/button.js"
+		},
+		"./card": {
+			"types": "./src/card.tsx",
+			"default": "./dist/card.js"
+		}
 	}
 }
