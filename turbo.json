@@ -20,6 +20,12 @@
 			"dependsOn": ["^build"],
 			"inputs": ["$TURBO_DEFAULT$", ".env*"],
 			"outputs": ["dist"]
+		},
+		"test": {
+			"dependsOn": ["build"]
+		},
+		"deploy": {
+			"dependsOn": ["lint", "check", "build"]
 		}
 	}
 }

@@ -1,6 +1,6 @@
 {
 	"name": "@repo/frontend-app",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"private": true,
 	"scripts": {
 		"check": "tsc --noEmit",
@@ -9,7 +9,6 @@
 		"build": "rsbuild build",
 		"preview": "rsbuild preview"
 	},
-
 	"dependencies": {
 		"react": "^19.0.0",
 		"react-dom": "^19.0.0",
@@ -24,7 +23,6 @@
 		"@types/react-dom": "^19.0.0",
 		"tailwindcss": "^4.0.0"
 	},
-
 	"imports": {
 		"#*": "./src/*"
 	}

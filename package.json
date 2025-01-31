@@ -1,6 +1,10 @@
 {
 	"name": "@repo/root",
 	"private": true,
+	"packageManager": "pnpm@10.0.0",
+	"engines": {
+		"node": ">=22.13.0"
+	},
 	"scripts": {
 		"build": "turbo build",
 		"dev": "turbo dev",
@@ -9,11 +13,9 @@
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^1.9.4",
+		"@changesets/cli": "^2.27.12",
+		"changeset-conventional-commits": "^0.2.5",
 		"turbo": "^2.3.4",
 		"typescript": "5.7.3"
-	},
-	"packageManager": "pnpm@10.0.0",
-	"engines": {
-		"node": ">=22.13.0"
 	}
 }
