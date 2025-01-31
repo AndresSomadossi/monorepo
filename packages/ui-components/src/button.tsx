@@ -1,6 +1,5 @@
 import type { ReactNode } from 'react';
 import { Code } from '#codex/other/code.js';
-// import { Code } from '#codex/other/code.js';
 
 interface ButtonProps {
 	children: ReactNode;
