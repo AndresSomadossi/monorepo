@@ -1,0 +1,146 @@
+# Repository rulesets configuration - save as .github/rulesets.yaml
+
+# Production Environment Ruleset
+name: Production Rules
+target: refs/heads/production
+enforcement: active
+conditions:
+  ref_name:
+    patterns: ['refs/heads/production']
+  repository_name:
+    patterns: ['*']
+rules:
+  creation: false
+  update:
+    enforcement: enabled
+  deletion: false
+  required_linear_history: true
+  required_signatures: true
+  pull_request:
+    required: true
+    required_approving_review_count: 2
+    dismiss_stale_reviews_on_push: true
+    require_code_owner_review: true
+    require_last_push_approval: true
+  required_status_checks:
+    required:
+      - 'deploy'
+      - 'security-scan'
+      - 'integration-tests'
+  required_deployments:
+    required:
+      - 'production'
+  bypass_actors:
+    groups:
+      - 'organization/devops-team'
+
+---
+# Staging Environment Ruleset
+name: Staging Rules
+target: refs/heads/staging
+enforcement: active
+conditions:
+  ref_name:
+    patterns: ['refs/heads/staging']
+rules:
+  creation: false
+  update:
+    enforcement: enabled
+  deletion: false
+  required_linear_history: true
+  pull_request:
+    required: true
+    required_approving_review_count: 1
+    dismiss_stale_reviews_on_push: true
+  required_status_checks:
+    required:
+      - 'deploy'
+      - 'integration-tests'
+  required_deployments:
+    required:
+      - 'staging'
+  bypass_actors:
+    groups:
+      - 'organization/lead-developers'
+
+---
+# Main Branch Ruleset
+name: Main Branch Rules
+target: refs/heads/main
+enforcement: active
+conditions:
+  ref_name:
+    patterns: ['refs/heads/main']
+rules:
+  creation: false
+  update:
+    enforcement: enabled
+  deletion: false
+  required_linear_history: true
+  pull_request:
+    required: true
+    required_approving_review_count: 1
+  required_status_checks:
+    required:
+      - 'build'
+      - 'test'
+      - 'lint'
+  bypass_actors:
+    groups:
+      - 'organization/developers'
+
+---
+# Feature Branch Ruleset
+name: Feature Branch Rules
+target: refs/heads/feature/*
+enforcement: active
+conditions:
+  ref_name:
+    patterns: ['refs/heads/feature/*', 'refs/heads/issue/*']
+rules:
+  creation: true
+  update:
+    enforcement: enabled
+  deletion: true
+  required_linear_history: true
+  required_status_checks:
+    required:
+      - 'build'
+      - 'test'
+  pull_request:
+    required: true
+    required_approving_review_count: 1
+
+---
+# Tag Protection Ruleset
+name: Tag Protection
+target: refs/tags/*
+enforcement: active
+conditions:
+  ref_name:
+    patterns: ['refs/tags/*']
+rules:
+  creation:
+    enforcement: enabled
+  update: false
+  deletion: false
+  required_signatures: true
+  bypass_actors:
+    groups:
+      - 'organization/release-managers'
+
+---
+# Metadata Ruleset
+metadata:
+  description: GitLab Flow ruleset configuration
+  maintainers:
+    - organization/devops-team
+  labels:
+    - name: gitlabflow
+      description: GitLab Flow branch strategy rulesets
+    - name: production
+      color: '#ff0000'
+    - name: staging
+      color: '#ffff00'
+    - name: development
+      color: '#00ff00'
