@@ -1,4 +1,5 @@
 name: CI
+
 on:
   push:
     branches:
@@ -15,7 +16,7 @@ jobs:
           version: 7
       - uses: actions/setup-node@v3
         with:
-          node-version: 16.x
+          node-version: 22.13
           cache: "pnpm"
 
       - run: pnpm install --frozen-lockfile
