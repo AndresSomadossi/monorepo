@@ -1,11 +1,13 @@
 {
 	"extends": "@repo/tools/typescript/react",
 	"compilerOptions": {
+		"moduleResolution": "bundler",
+		"module": "esnext",
 		"outDir": "dist",
 		"rootDir": "src",
 		"baseUrl": ".",
 		"paths": {
-			"@/*": ["src/*"]
+			"@/*": ["./src/*"]
 		}
 	},
 	"include": ["src"],
