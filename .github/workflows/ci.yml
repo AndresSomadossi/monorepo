@@ -25,5 +25,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      - name: Debug file structure
+        run: ls -R
+
+      - name: package.json
+        run: cat frontend/app/package.json
+
       - name: Turbo
         run: pnpm turbo lint build
