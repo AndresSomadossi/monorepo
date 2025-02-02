@@ -1,6 +1,7 @@
 {
 	"name": "@repo/frontend-app",
 	"version": "1.0.1",
+	"type": "module",
 	"private": true,
 	"scripts": {
 		"check": "tsc --noEmit",
