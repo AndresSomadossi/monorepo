@@ -9,39 +9,21 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [22.3]
 
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install pnpm
+      - name: Use pnpm
         uses: pnpm/action-setup@v4
 
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Use Nodejs
         uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version-file: 'package.json'
           cache: 'pnpm'
-      - name: Install dependencies
-        run: pnpm install
-
-      - name: Get pnpm store directory
-        id: pnpm-store
-        shell: bash
-        run: echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
-
-      - uses: actions/cache@v3
-        name: Setup pnpm cache
-        with:
-          path: ${{ env.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
 
       - name: Install dependencies
         run: pnpm install
 
-      - name: Test
+      - name: Turbo
         run: pnpm turbo check lint build
