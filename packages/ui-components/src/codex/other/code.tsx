@@ -10,7 +10,7 @@ export function Code({
 }): JSX.Element {
 	return (
 		<code className={className}>
-			<p>This is CODE parenteeeeee</p>
+			<p>This is CODE in parent</p>
 
 			<p>This for children: {children}</p>
 			<Card title={''} href={''}>

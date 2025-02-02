@@ -1,0 +1,6 @@
+{
+	"version": "0.2",
+	"language": "en",
+	"ignorePaths": ["node_modules/**", "dist/**", "pnpm-lock.yaml"],
+	"words": ["API", "Filenaming", "JSON", "rsbuild", "Turborepo"]
+}

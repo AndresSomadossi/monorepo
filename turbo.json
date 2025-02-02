@@ -2,30 +2,31 @@
 	"$schema": "https://turbo.build/schema.json",
 	"ui": "tui",
 	"tasks": {
-		"transit": {
-			"dependsOn": ["^transit"]
-		},
-		"lint": {
-			"dependsOn": ["transit"]
-		},
 		"check": {
-			"dependsOn": ["^build", "transit"]
+			"dependsOn": ["^check"]
 		},
-		"dev": {
-			"cache": false,
-			"persistent": true,
-			"dependsOn": ["^build"]
+		"lint-check": {
+			"dependsOn": ["check"]
 		},
+		"type-check": {
+			"dependsOn": ["check", "build"]
+		},
+		"//#spell-check": {},
 		"build": {
 			"dependsOn": ["^build"],
 			"inputs": ["$TURBO_DEFAULT$", ".env*"],
 			"outputs": ["dist"]
 		},
+		"dev": {
+			"cache": false,
+			"persistent": true,
+			"dependsOn": ["build"]
+		},
 		"test": {
 			"dependsOn": ["build"]
 		},
 		"deploy": {
-			"dependsOn": ["lint", "check", "build"]
+			"dependsOn": ["lint-check", "type-check", "spell-check", "build"]
 		}
 	}
 }
