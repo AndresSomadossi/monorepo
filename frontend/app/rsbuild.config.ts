@@ -3,6 +3,8 @@ const path = require('path');
 import { defineConfig } from '@rsbuild/core';
 import { pluginReact } from '@rsbuild/plugin-react';
 
+console.log('Resolved @ alias:', path.resolve(__dirname, 'src'));
+
 export default defineConfig({
 	resolve: {
 		alias: {
