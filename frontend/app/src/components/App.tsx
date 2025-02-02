@@ -1,5 +1,5 @@
 import { Button } from '@repo/ui-components/button';
-import { Title } from '#components/title.js';
+import { Title } from '#components/title';
 
 const App = () => {
 	return (
