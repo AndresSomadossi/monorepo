@@ -1,5 +1,5 @@
-import { Title } from '@/components/title';
 import { Button } from '@repo/ui-components/button';
+import { Title } from './title';
 
 const App = () => {
 	return (
