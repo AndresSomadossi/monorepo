@@ -23,7 +23,18 @@
 			"recommended": true,
 			"correctness": { "noUnusedImports": { "level": "warn", "fix": "safe" } },
 			"complexity": { "useArrowFunction": { "level": "error", "fix": "safe" } },
-			"style": { "noNonNullAssertion": "off", "useImportType": "off", "useFilenamingConvention": "error" },
+			"style": {
+				"noNonNullAssertion": "off",
+				"useImportType": "off",
+				"useFilenamingConvention": {
+					"level": "error",
+					"options": {
+						"strictCase": false,
+						"requireAscii": true,
+						"filenameCases": ["kebab-case"]
+					}
+				}
+			},
 			"nursery": {
 				"useComponentExportOnlyModules": {
 					"level": "error",

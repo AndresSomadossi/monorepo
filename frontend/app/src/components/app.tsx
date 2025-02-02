@@ -1,7 +1,15 @@
-export const Title = () => {
+import { Title } from '@/components/title';
+import { Button } from '@repo/ui-components/button';
+
+const App = () => {
 	return (
 		<div className="content">
-			<h1 className="bg-teal-800 font-bold text-5xl underline">Hello world!</h1>
+			<Title />
+			<Button className=" bg-red-400" appName="any">
+				Click me!
+			</Button>
 		</div>
 	);
 };
+
+export default App;
