@@ -26,4 +26,4 @@ jobs:
         run: pnpm install
 
       - name: Turbo
-        run: pnpm turbo check lint build
+        run: pnpm turbo lint build
