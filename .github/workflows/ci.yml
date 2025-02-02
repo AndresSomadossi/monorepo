@@ -24,5 +24,10 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: v3
+        run: ls -la frontend/app/src
+      - name: v4
+        run: ls -la frontend/app/src/components
+
       - name: Turbo
         run: pnpm turbo lint build
