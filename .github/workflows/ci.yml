@@ -27,4 +27,4 @@ jobs:
         run: pnpm install --frozen-lockfile
         
       - name: Turbo
-        run: pnpm turbo spell-check lint-check type-check
+        run: pnpm turbo sec:audit sec:secrets check:spell check:lint check:types

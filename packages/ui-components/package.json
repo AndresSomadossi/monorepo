@@ -4,8 +4,8 @@
 	"private": true,
 	"type": "module",
 	"scripts": {
-		"lint": "biome check --write",
-		"check": "tsc --noEmit",
+		"check:types": "tsc --noEmit",
+		"check:lint": "biome check --write",
 		"dev": "tsc && tsc --watch",
 		"build": "tsc",
 		"generate:component": "turbo gen react-component",

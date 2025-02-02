@@ -4,8 +4,8 @@
 	"private": true,
 	"type": "module",
 	"scripts": {
-		"check": "tsc --noEmit",
-		"lint": "biome check --write",
+		"check:types": "tsc --noEmit",
+		"check:lint": "biome check --write",
 		"dev": "rsbuild dev --open",
 		"build": "rsbuild build",
 		"preview": "rsbuild preview"

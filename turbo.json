@@ -2,16 +2,12 @@
 	"$schema": "https://turbo.build/schema.json",
 	"ui": "tui",
 	"tasks": {
-		"check": {
-			"dependsOn": ["^check"]
-		},
-		"lint-check": {
-			"dependsOn": ["check"]
-		},
-		"type-check": {
-			"dependsOn": ["check", "build"]
-		},
-		"//#spell-check": {},
+		"check": { "dependsOn": ["^check"] },
+		"check:lint": { "dependsOn": ["check"] },
+		"check:types": { "dependsOn": ["check", "build"] },
+		"//#check:spell": {},
+		"//#sec:audit": {},
+		"//#sec:secrets": {},
 		"build": {
 			"dependsOn": ["^build"],
 			"inputs": ["$TURBO_DEFAULT$", ".env*"],

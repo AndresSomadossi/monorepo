@@ -4,7 +4,7 @@
 	"private": true,
 
 	"scripts": {
-		"lint": "biome check --write"
+		"check:lint": "biome check --write"
 	},
 
 	"imports": {

@@ -6,12 +6,16 @@
 		"node": ">=22.13.0"
 	},
 	"scripts": {
-		"spell-check": "cspell ."
+		"check:spell": "cspell .",
+		"sec:audit": "pnpm audit",
+		"sec:secrets": "secretlint '**/*'"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^1.9.4",
 		"@changesets/cli": "^2.27.12",
+		"@secretlint/secretlint-rule-preset-recommend": "^9.0.0",
 		"cspell": "^8.17.3",
+		"secretlint": "^9.0.0",
 		"turbo": "^2.4.0",
 		"typescript": "5.7.3"
 	}
