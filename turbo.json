@@ -9,7 +9,7 @@
 			"dependsOn": ["transit"]
 		},
 		"check": {
-			"dependsOn": ["transit"]
+			"dependsOn": ["transit", "^build"]
 		},
 		"dev": {
 			"cache": false,
