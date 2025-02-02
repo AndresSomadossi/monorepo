@@ -3,7 +3,10 @@
 	"compilerOptions": {
 		"outDir": "dist",
 		"rootDir": "src",
-		"module": "Preserve"
+		"baseUrl": ".",
+		"paths": {
+			"#*": ["src/*"]
+		}
 	},
 	"include": ["src"],
 	"exclude": ["node_modules", "dist"]

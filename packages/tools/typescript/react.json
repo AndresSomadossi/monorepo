@@ -2,6 +2,7 @@
 	"$schema": "https://json.schemastore.org/tsconfig",
 	"extends": "./base",
 	"compilerOptions": {
+		"module": "Preserve",
 		"lib": ["ES2020", "DOM", "DOM.Iterable"],
 		"jsx": "react-jsx",
 		"useDefineForClassFields": true
