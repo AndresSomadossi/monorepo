@@ -23,20 +23,13 @@
 			"recommended": true,
 			"correctness": { "noUnusedImports": { "level": "warn", "fix": "safe" } },
 			"complexity": { "useArrowFunction": { "level": "error", "fix": "safe" } },
-			"style": { "noNonNullAssertion": "off", "useImportType": "off" },
+			"style": { "noNonNullAssertion": "off", "useImportType": "off", "useFilenamingConvention": "error" },
 			"nursery": {
 				"useComponentExportOnlyModules": {
 					"level": "error",
 					"options": {
 						"allowConstantExport": true,
-						"allowExportNames": [
-							"json",
-							"loader",
-							"headers",
-							"meta",
-							"links",
-							"scripts"
-						]
+						"allowExportNames": ["json", "loader", "headers", "meta", "links", "scripts"]
 					}
 				},
 				"useSortedClasses": {
