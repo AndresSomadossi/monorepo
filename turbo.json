@@ -6,8 +6,16 @@
 		"check:lint": { "dependsOn": ["check"] },
 		"check:types": { "dependsOn": ["check", "build"] },
 		"//#check:spell": {},
-		"//#sec:audit": {},
+
+		"//#sec:audit": { "inputs": ["pnpm-lock.yaml"] },
 		"//#sec:secrets": {},
+
+		"test:dev": { "dependsOn": ["build"] },
+		"test:run": { "dependsOn": ["build"] },
+		"test:run:smoke": { "dependsOn": ["build"] },
+		"test:run:unit": { "dependsOn": ["build"] },
+		"test:coverage": { "dependsOn": ["build"] },
+
 		"build": {
 			"dependsOn": ["^build"],
 			"inputs": ["$TURBO_DEFAULT$", ".env*"],
@@ -16,9 +24,6 @@
 		"dev": {
 			"cache": false,
 			"persistent": true,
-			"dependsOn": ["build"]
-		},
-		"test": {
 			"dependsOn": ["build"]
 		},
 		"deploy": {

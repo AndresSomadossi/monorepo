@@ -1,0 +1,10 @@
+{
+	"extends": "./typescript/react",
+	"compilerOptions": {
+		"noEmit": false,
+		"outDir": "dist",
+		"rootDir": "."
+	},
+	"include": ["src", "test"],
+	"exclude": ["node_modules", "dist"]
+}

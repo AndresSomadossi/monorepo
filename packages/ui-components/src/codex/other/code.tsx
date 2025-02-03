@@ -1,5 +1,5 @@
 import type { JSX } from 'react';
-import { Card } from '#card.js';
+import Card from '#card.js';
 
 export function Code({
 	children,

@@ -55,8 +55,7 @@
 		}
 	},
 	"javascript": {
-		"formatter": { "quoteStyle": "single" },
-		"jsxRuntime": "reactClassic"
+		"formatter": { "quoteStyle": "single" }
 	},
 	"json": {
 		"parser": { "allowComments": true },

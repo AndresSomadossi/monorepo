@@ -2,6 +2,7 @@
 	"name": "@repo/tools",
 	"version": "1.0.0",
 	"private": true,
+	"type": "module",
 
 	"scripts": {
 		"check:lint": "biome check --write"
@@ -11,9 +12,15 @@
 		"#*": "./src/*"
 	},
 
+	"devDependencies": {
+		"@turbo/gen": "^2.3.4"
+	},
+
 	"exports": {
 		"./typescript/base": "./typescript/base.json",
 		"./typescript/react": "./typescript/react.json",
-		"./biome": "./biome/biome.jsonc"
+		"./biome": "./biome/biome.jsonc",
+		"./vitest/react/config": "./test/react.config.js",
+		"./vitest/react/setup": "./test/react-setup.ts"
 	}
 }
