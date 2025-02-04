@@ -19,8 +19,6 @@
 	"exports": {
 		"./typescript/base": "./typescript/base.json",
 		"./typescript/react": "./typescript/react.json",
-		"./biome": "./biome/biome.jsonc",
-		"./vitest/react/config": "./test/react.config.js",
-		"./vitest/react/setup": "./test/react-setup.ts"
+		"./biome": "./biome/biome.jsonc"
 	}
 }
