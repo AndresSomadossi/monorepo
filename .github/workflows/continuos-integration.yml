@@ -58,6 +58,8 @@ jobs:
       - uses: ./.github/workflows/deploy
         with:
           target: ${{ needs.ephemeral-mapping.outputs.user_value }}
+          TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+          TURBO_TEAM: ${{ vars.TURBO_TEAM }}
 
   staging-deploy:
     runs-on: ubuntu-latest
@@ -70,3 +72,5 @@ jobs:
       - uses: ./.github/workflows/deploy
         with:
           target: staging
+          TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+          TURBO_TEAM: ${{ vars.TURBO_TEAM }}
