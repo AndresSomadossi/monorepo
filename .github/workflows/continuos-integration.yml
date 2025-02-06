@@ -1,4 +1,4 @@
-name: ContinuosIntegration
+name: ContinuousIntegration
 
 on:
   pull_request:
@@ -11,76 +11,56 @@ jobs:
     env:
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
       TURBO_TEAM: ${{ vars.TURBO_TEAM }}
-
     steps:
       - name: Fetch Source Code
         uses: actions/checkout@v4
-      - name: Use pnpm
+
+      - name: Setup pnpm
         uses: pnpm/action-setup@v4
-      - name: Use Nodejs
+
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version-file: 'package.json'
           cache: 'pnpm'
 
-      - name: Install dependencies
+      - name: Install Dependencies
         run: pnpm install --frozen-lockfile
-        
-      - name: Checks
+
+      - name: Run Checks
         run: node --run checks
 
-  ephemeral-deploy:
+  ephemeral-mapping:
     needs: ci-checks
     runs-on: ubuntu-latest
-    env:
-      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
-      TURBO_TEAM: ${{ vars.TURBO_TEAM }}
-
+    outputs:
+      user_value: ${{ steps.mapping.outputs.user_value }}
     steps:
       - name: Fetch Source Code
         uses: actions/checkout@v4
-      - name: Use pnpm
-        uses: pnpm/action-setup@v4
-      - name: Use Nodejs
-        uses: actions/setup-node@v4
-        with:
-          node-version-file: 'package.json'
-          cache: 'pnpm'
 
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-        
-      - name: Deploy to Ephemeral Environment
+      - name: Map PR User to Username
+        id: mapping
         run: |
           export GITHUB_PR_USER=${{ github.event.pull_request.user.login }}
           USERNAME_MAPPING=$(node -e "const mappings = require('./.github/ephemeral-mappings.json'); console.log(mappings[process.env.GITHUB_PR_USER] || mappings.default);")
-          echo "Using $USERNAME_MAPPING"
-          node --run deploy "$USERNAME_MAPPING"
+          echo "user_value=$USERNAME_MAPPING" >> $GITHUB_OUTPUT
+
+  ephemeral-deploy:
+    runs-on: ubuntu-latest
+    needs: ephemeral-mapping
+    steps:
+      - uses: ./.github/workflows/deploy.yml
+        with:
+          target: ${{ needs.ephemeral-mapping.outputs.user_value }}
 
   staging-deploy:
-    needs: [ci-checks, ephemeral-deploy]
     runs-on: ubuntu-latest
+    needs: ephemeral-deploy
     environment:
       name: staging
-      url: https://staging.example.com
-    
-    env:
-      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
-      TURBO_TEAM: ${{ vars.TURBO_TEAM }}
-
+      url: https://staging.example.com  
     steps:
-      - name: Fetch Source Code
-        uses: actions/checkout@v4
-      - name: Use pnpm
-        uses: pnpm/action-setup@v4
-      - name: Use Nodejs
-        uses: actions/setup-node@v4
+      - uses: ./.github/workflows/deploy.yml
         with:
-          node-version-file: 'package.json'
-          cache: 'pnpm'
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-        
-      - name: Deploy
-        run: node --run deploy staging
+          target: staging
