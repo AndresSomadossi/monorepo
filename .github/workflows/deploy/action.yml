@@ -15,6 +15,10 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    env:
+      TARGET: ${{ inputs.target }}
+      TURBO_TOKEN: ${{ inputs.TURBO_TOKEN }}
+      TURBO_TEAM: ${{ inputs.TURBO_TEAM }}
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -32,8 +36,4 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Deploy
-        env:
-          TARGET: ${{ inputs.target }}
-          TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
-          TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
         run: echo "Deploying: $TARGET" && node --run deploy -- $TARGET
