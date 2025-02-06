@@ -1,39 +1,37 @@
 name: Deploy Workflow
-on:
-  workflow_call:
-    inputs:
-      target:
-        required: true
-        type: string
-      TURBO_TOKEN:
-        required: true
-        type: secret
-      TURBO_TEAM:
-        required: true
-        type: secret
+
+inputs:
+  target:
+    required: true
+    type: string
+  TURBO_TOKEN:
+    required: true
+    type: secret
+  TURBO_TEAM:
+    required: true
+    type: secret
         
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    env:
-      TARGET: ${{ inputs.target }}
-      TURBO_TOKEN: ${{ inputs.TURBO_TOKEN }}
-      TURBO_TEAM: ${{ inputs.TURBO_TEAM }}
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
+runs:
+  using: "composite"
+  steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
+    - name: Setup pnpm
+      uses: pnpm/action-setup@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version-file: 'package.json'
-          cache: 'pnpm'
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version-file: 'package.json'
+        cache: 'pnpm'
 
-      - name: Install Dependencies
-        run: pnpm install --frozen-lockfile
+    - name: Install Dependencies
+      run: pnpm install --frozen-lockfile 
 
-      - name: Deploy
-        run: echo "Deploying: $TARGET" && node --run deploy -- $TARGET
+    - name: Deploy
+      env:
+        TARGET: ${{ inputs.target }}
+        TURBO_TOKEN: ${{ inputs.TURBO_TOKEN }}
+        TURBO_TEAM: ${{ inputs.TURBO_TEAM }}
+      run: echo "Deploying: $TARGET" && node --run deploy -- $TARGET
