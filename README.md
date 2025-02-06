@@ -6,8 +6,7 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.7.3-blue.svg)](https://www.typescriptlang.org/)
 ![Version](https://img.shields.io/github/v/release/username/repo)
 
-
-A modern monorepo setup using pnpm workspaces & Turborepo
+A modern monorepo setup using Turborepo and pnpm workspaces
 
 ## Project Structure
 
