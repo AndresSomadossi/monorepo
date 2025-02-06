@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  checks:
+  ci-checks:
     name: Checks
     runs-on: ubuntu-latest
     env:
@@ -23,9 +23,63 @@ jobs:
         with:
           node-version-file: 'package.json'
           cache: 'pnpm'
-          
+
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
         
       - name: Checks
         run: node --run checks
+
+  ephemeral-deploy:
+    needs: ci-checks
+    runs-on: ubuntu-latest
+    env:
+      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+      TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+
+    steps:
+      - name: Fetch Source Code
+        uses: actions/checkout@v4
+      - name: Use pnpm
+        uses: pnpm/action-setup@v4
+      - name: Use Nodejs
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: 'package.json'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+        
+      - name: Deploy to Ephemeral Environment
+        run: |
+          USERNAME_MAPPING=$(node -e "const mappings = require('./.github/username-mappings.json'); console.log(mappings[process.env.GITHUB_PR_USER] || mappings.default)" --env.GITHUB_PR_USER="${{ github.event.pull_request.user.login }}")
+          node --run deploy "$USERNAME_MAPPING"
+
+  staging-deploy:
+    needs: [ci-checks, ephemeral-deploy]
+    runs-on: ubuntu-latest
+    environment:
+      name: staging
+      url: https://staging.example.com
+    
+    env:
+      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+      TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+
+    steps:
+      - name: Fetch Source Code
+        uses: actions/checkout@v4
+      - name: Use pnpm
+        uses: pnpm/action-setup@v4
+      - name: Use Nodejs
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: 'package.json'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+        
+      - name: Deploy
+        run: node --run deploy staging
