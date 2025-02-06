@@ -10,6 +10,58 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  validate-issue:
+    runs-on: ubuntu-latest
+    outputs:
+      issue_title: ${{ steps.extract.outputs.issue_title }}
+    steps:
+      - name: Validate Branch and PR Title for Issue Number and Extract Issue Title
+        id: extract
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "Using branch: '${{ github.head_ref }}'"
+          # Extract the first number from the branch name.
+          ISSUE_NUMBER=$(echo "${{ github.head_ref }}" | grep -oE '[0-9]+')
+          if [ -z "$ISSUE_NUMBER" ]; then
+            echo "❌ No issue number found in branch name."
+            exit 1
+          fi
+          echo "✅ Issue number found in branch: $ISSUE_NUMBER"
+
+          # Validate that the PR title contains the same issue number.
+          PR_TITLE="${{ github.event.pull_request.title }}"
+          echo "PR Title: $PR_TITLE"
+          if ! echo "$PR_TITLE" | grep -q "$ISSUE_NUMBER"; then
+            echo "❌ PR title does not reference the issue number $ISSUE_NUMBER."
+            exit 1
+          fi
+          echo "✅ PR title references the issue number: $ISSUE_NUMBER"
+
+          # Get issue details via GitHub API.
+          ISSUE_JSON=$(curl -s -H "Authorization: token $GITHUB_TOKEN" \
+            "https://api.github.com/repos/${{ github.repository }}/issues/$ISSUE_NUMBER")
+          ISSUE_TITLE=$(echo "$ISSUE_JSON" | jq -r '.title')
+          if [ "$ISSUE_TITLE" = "null" ] || [ -z "$ISSUE_TITLE" ]; then
+            echo "❌ Issue not found or issue title is empty."
+            exit 1
+          fi
+          echo "✅ Issue title: $ISSUE_TITLE"
+          echo "issue_title=$ISSUE_TITLE" >> "$GITHUB_OUTPUT"
+
+      - name: Enable Auto Merge with Issue Title
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Get the pull request number from the event payload.
+          PR_NUMBER=${{ github.event.pull_request.number }}
+          echo "Enabling auto merge for PR #$PR_NUMBER with commit title: ${{ steps.extract.outputs.issue_title }}"
+          curl -X PUT \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: token $GITHUB_TOKEN" \
+            "https://api.github.com/repos/${{ github.repository }}/pulls/$PR_NUMBER/auto-merge" \
+            -d '{"merge_method": "squash", "commit_title": "'"${{ steps.extract.outputs.issue_title }}"'"}'
+
   ci-checks:
     runs-on: ubuntu-latest
     env:
