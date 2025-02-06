@@ -4,9 +4,7 @@
 [![pnpm](https://img.shields.io/badge/pnpm-10.0.0-orange.svg)](https://pnpm.io)
 [![Node](https://img.shields.io/badge/node-%3E%3D22.13.0-brightgreen.svg)](https://nodejs.org)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.7.3-blue.svg)](https://www.typescriptlang.org/)
-[![TailwindCSS](https://img.shields.io/badge/TailwindCSS-4.0.0-38B2AC.svg)](https://tailwindcss.com)
 ![Version](https://img.shields.io/github/v/release/username/repo)
-
 
 A modern monorepo setup using Turborepo and pnpm workspaces
 
