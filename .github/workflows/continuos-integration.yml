@@ -1,31 +1,76 @@
-name: ContinuosIntegration
+name: ContinuousIntegration
 
 on:
   pull_request:
     branches:
       - main
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
-  checks:
-    name: Checks
+  ci-checks:
     runs-on: ubuntu-latest
     env:
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
       TURBO_TEAM: ${{ vars.TURBO_TEAM }}
-
     steps:
       - name: Fetch Source Code
         uses: actions/checkout@v4
-      - name: Use pnpm
+
+      - name: Setup pnpm
         uses: pnpm/action-setup@v4
-      - name: Use Nodejs
+
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version-file: 'package.json'
           cache: 'pnpm'
-          
-      - name: Install dependencies
+
+      - name: Install Dependencies
         run: pnpm install --frozen-lockfile
-        
-      - name: Checks
+
+      - name: Run Checks
         run: node --run checks
+
+  ephemeral-mapping:
+    needs: ci-checks
+    runs-on: ubuntu-latest
+    outputs:
+      user_value: ${{ steps.mapping.outputs.user_value }}
+    steps:
+      - name: Fetch Source Code
+        uses: actions/checkout@v4
+
+      - name: Map PR User to Username
+        id: mapping
+        run: |
+          export GITHUB_PR_USER=${{ github.event.pull_request.user.login }}
+          USERNAME_MAPPING=$(node -e "const mappings = require('./.github/ephemeral-mappings.json'); console.log(mappings[process.env.GITHUB_PR_USER] || mappings.default);")
+          echo "user_value=$USERNAME_MAPPING" >> $GITHUB_OUTPUT
+
+  ephemeral-deploy:
+    runs-on: ubuntu-latest
+    needs: ephemeral-mapping
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/workflows/deploy
+        with:
+          target: ${{ needs.ephemeral-mapping.outputs.user_value }}
+          TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+          TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+
+  staging-deploy:
+    runs-on: ubuntu-latest
+    needs: ephemeral-deploy
+    environment:
+      name: staging
+      url: https://staging.example.com  
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/workflows/deploy
+        with:
+          target: staging
+          TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+          TURBO_TEAM: ${{ vars.TURBO_TEAM }}

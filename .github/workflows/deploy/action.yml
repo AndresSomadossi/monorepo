@@ -1,0 +1,36 @@
+name: Deploy Workflow
+
+inputs:
+  target:
+    required: true
+  TURBO_TOKEN:
+    required: true
+  TURBO_TEAM:
+    required: true
+        
+runs:
+  using: "composite"
+  steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Setup pnpm
+      uses: pnpm/action-setup@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version-file: 'package.json'
+        cache: 'pnpm'
+
+    - name: Install Dependencies
+      shell: bash
+      run: pnpm install --frozen-lockfile 
+
+    - name: Deploy
+      shell: bash
+      env:
+        TARGET: ${{ inputs.target }}
+        TURBO_TOKEN: ${{ inputs.TURBO_TOKEN }}
+        TURBO_TEAM: ${{ inputs.TURBO_TEAM }}
+      run: node --run deploy -- $TARGET
