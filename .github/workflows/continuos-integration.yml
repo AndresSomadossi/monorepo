@@ -50,6 +50,8 @@ jobs:
     runs-on: ubuntu-latest
     needs: ephemeral-mapping
     steps:
+      - name: Fetch Source Code
+        uses: actions/checkout@v4
       - uses: ./.github/workflows/deploy.yml
         with:
           target: ${{ needs.ephemeral-mapping.outputs.user_value }}
@@ -61,6 +63,8 @@ jobs:
       name: staging
       url: https://staging.example.com  
     steps:
+      - name: Fetch Source Code
+        uses: actions/checkout@v4
       - uses: ./.github/workflows/deploy.yml
         with:
           target: staging
