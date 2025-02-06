@@ -8,7 +8,7 @@
 ![Version](https://img.shields.io/github/v/release/username/repo)
 
 
-A modern monorepo setup using Turborepo, pnpm workspaces, React, TypeScript, and TailwindCSS.
+A modern monorepo setup using Turborepo and pnpm workspaces
 
 ## Project Structure
 
