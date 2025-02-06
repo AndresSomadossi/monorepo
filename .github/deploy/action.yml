@@ -31,8 +31,9 @@ jobs:
       - name: Install Dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Deploy to ${{ inputs.target }}
+      - name: Deploy
         env:
+          TARGET: ${{ inputs.target }}
           TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
           TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
-        run: node --run deploy ${{ inputs.target }}
+        run: echo "Deploying: $TARGET" && node --run deploy -- $TARGET
