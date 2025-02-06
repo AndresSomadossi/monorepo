@@ -55,7 +55,7 @@ jobs:
     needs: ephemeral-mapping
     steps:
       - uses: actions/checkout@v4
-      - uses: ./.github/workflows/
+      - uses: ./.github/workflows/deploy
         with:
           target: ${{ needs.ephemeral-mapping.outputs.user_value }}
 
@@ -67,6 +67,6 @@ jobs:
       url: https://staging.example.com  
     steps:
       - uses: actions/checkout@v4
-      - uses: ./.github/workflows
+      - uses: ./.github/workflows/deploy
         with:
           target: staging
