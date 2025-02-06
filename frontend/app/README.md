@@ -7,6 +7,8 @@
 
 The main React application for the monorepo, built with modern tooling and best practices.
 
+Trying new changes
+
 ## Features
 
 - ⚛️ Modern React application
