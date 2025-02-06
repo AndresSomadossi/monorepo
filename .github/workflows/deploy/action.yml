@@ -27,9 +27,11 @@ runs:
         cache: 'pnpm'
 
     - name: Install Dependencies
+      shell: bash
       run: pnpm install --frozen-lockfile 
 
     - name: Deploy
+      shell: bash
       env:
         TARGET: ${{ inputs.target }}
         TURBO_TOKEN: ${{ inputs.TURBO_TOKEN }}
