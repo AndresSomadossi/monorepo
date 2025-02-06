@@ -1,6 +1,16 @@
 {
 	"version": "0.2",
 	"language": "en",
-	"ignorePaths": ["**/node_modules/**", "**/dist/**", "pnpm-lock.yaml", "**/coverage/**"],
-	"words": ["Filenaming", "rsbuild", "Turborepo"]
+	"ignorePaths": [
+		"**/node_modules/**",
+		"**/dist/**",
+		"pnpm-lock.yaml",
+		"**/coverage/**"
+	],
+	"words": [
+		"Filenaming",
+		"rsbuild",
+		"Somadossi",
+		"Turborepo"
+	]
 }
