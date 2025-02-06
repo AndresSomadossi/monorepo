@@ -54,6 +54,7 @@ jobs:
         run: |
           export GITHUB_PR_USER=${{ github.event.pull_request.user.login }}
           USERNAME_MAPPING=$(node -e "const mappings = require('./.github/ephemeral-mappings.json'); console.log(mappings[process.env.GITHUB_PR_USER] || mappings.default);")
+          echo "Using $USERNAME_MAPPING"
           node --run deploy "$USERNAME_MAPPING"
 
   staging-deploy:

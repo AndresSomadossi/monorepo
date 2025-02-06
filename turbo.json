@@ -27,7 +27,7 @@
 			"dependsOn": ["build"]
 		},
 		"deploy": {
-			"dependsOn": ["lint-check", "type-check", "spell-check", "build"]
+			"dependsOn": ["build"]
 		}
 	}
 }

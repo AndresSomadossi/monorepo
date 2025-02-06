@@ -11,7 +11,8 @@
 		"test:run:smoke": "vitest run --dir test/smoke",
 		"test:run:unit": "vitest run --dir test/unit",
 		"test:ui": "vitest --ui",
-		"test:coverage": "vitest run --coverage"
+		"test:coverage": "vitest run --coverage",
+		"deploy": "echo \"Deploying with args: $*\""
 	},
 	"imports": {
 		"#*": "./src/*"

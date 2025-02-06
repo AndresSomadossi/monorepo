@@ -7,6 +7,7 @@
 	},
 	"scripts": {
 		"checks": "pnpm install && turbo sec:audit sec:secrets check:spell check:lint check:types test:run:smoke",
+		"deploy": "pnpm install && turbo deploy",
 		"check:spell": "cspell .",
 		"sec:audit": "pnpm audit",
 		"sec:secrets": "secretlint '**/*'"
