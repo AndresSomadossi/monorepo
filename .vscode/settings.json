@@ -12,5 +12,24 @@
 	"typescript.updateImportsOnFileMove.enabled": "always",
 	"javascript.updateImportsOnFileMove.enabled": "always",
 	"typescript.preferences.importModuleSpecifier": "non-relative",
-	"github-actions.workflows.pinned.workflows": [".github/workflows/ci.yml"]
+	"git.confirmSync": false,
+	"git.enableSmartCommit": true,
+	"githubPullRequests.pushBranch": "always",
+	"githubPullRequests.createDefaultBaseBranch": "repositoryDefault",
+	"githubIssues.issueCompletionFormatScm": "${issueTitle} ${issueNumberLabel}",
+	"githubIssues.issueBranchTitle": "${issueNumber}-${sanitizedLowercaseIssueTitle}",
+	"githubIssues.useBranchForIssues": "on",
+	"githubIssues.workingIssueFormatScm": "Feature branch initial commit",
+	"githubIssues.queries": [
+		{
+			"label": "My Issues",
+			"query": "repo:${owner}/${repository} is:open assignee:${user} ",
+			"groupBy": ["milestone"]
+		},
+		{
+			"label": "Sprint Backlog",
+			"query": "repo:${owner}/${repository} state:open milestone:* sort:created-desc",
+			"groupBy": ["milestone"]
+		}
+	]
 }
