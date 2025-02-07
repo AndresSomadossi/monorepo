@@ -1,0 +1,17 @@
+# Global owners - fallback for everything
+* @AndresSomadossi
+
+# Frontend packages
+/frontend/app/ @AndresSomadossi
+
+# Backend packages
+/backend/ @AndresSomadossi
+
+# Platform configurations
+/platform/ @AndresSomadossi
+
+# Shared packages
+/packages/ui-components/ @AndresSomadossi
+/packages/tools/ @AndresSomadossi
+
+/.github/ @AndresSomadossi

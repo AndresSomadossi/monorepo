@@ -33,6 +33,10 @@
 			"label": "Sprint Backlog",
 			"query": "repo:${owner}/${repository} state:open milestone:* sort:created-desc",
 			"groupBy": ["milestone"]
+		},
+		{
+			"label": "Pending Tasks",
+			"query": "repo:${owner}/${repository} state:open sort:created-desc"
 		}
 	]
 }
