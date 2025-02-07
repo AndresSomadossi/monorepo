@@ -19,7 +19,9 @@
 	"githubIssues.issueCompletionFormatScm": "${issueTitle} ${issueNumberLabel}",
 	"githubIssues.issueBranchTitle": "${issueNumber}-${sanitizedLowercaseIssueTitle}",
 	"githubIssues.useBranchForIssues": "on",
-	"githubIssues.workingIssueFormatScm": "Resolves #${issueNumberLabel} ${issueTitle}",
+	"githubIssues.workingIssueFormatScm": "Resolves ${issueNumberLabel} ${issueTitle}",
+	"githubPullRequests.pullPullRequestBranchBeforeCheckout": "pullAndMergeBase",
+	"githubPullRequests.pullBranch": "always",
 	"githubIssues.queries": [
 		{
 			"label": "My Issues",
