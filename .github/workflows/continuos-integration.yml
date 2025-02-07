@@ -53,7 +53,7 @@ jobs:
           echo "✅ Issue title: $ISSUE_TITLE"
           echo "issue_title=$ISSUE_TITLE" >> "$GITHUB_OUTPUT"
 
-      - name: Enable Auto Merge with Issue Title
+      - name: Enable Auto Merge
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |

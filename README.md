@@ -1,6 +1,6 @@
 # Turborepo Project
 
-[![Build Status](https://github.com/andressomadossi/monorepo/actions/workflows/ci.yml/badge.svg)](https://github.com/andressomadossi/monorepo/actions/workflows/ci.yml)
+[![ContinuousIntegration](https://github.com/AndresSomadossi/monorepo/actions/workflows/continuos-integration.yml/badge.svg)](https://github.com/AndresSomadossi/monorepo/actions/workflows/continuos-integration.yml)
 [![pnpm](https://img.shields.io/badge/pnpm-10.0.0-orange.svg)](https://pnpm.io)
 [![Node](https://img.shields.io/badge/node-%3E%3D22.13.0-brightgreen.svg)](https://nodejs.org)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.7.3-blue.svg)](https://www.typescriptlang.org/)
@@ -24,12 +24,10 @@ A modern monorepo setup using Typescript, Turborepo and pnpm workspaces
 
 - 🏎️ **Turborepo** - High-performance build system
 - 📦 **pnpm** - Fast, disk space efficient package manager
-- ⚛️ **React** - Frontend framework
-- 🎨 **TailwindCSS** - Utility-first CSS framework
-- 🔧 **TypeScript** - Type safety across the entire codebase
-- 📱 **RSBuild** - Modern build tool for React applications
 - 🔍 **Biome** - Fast linter and formatter
 - 🔄 **Changesets** - Versioning and changelog management
+- 🔧 **TypeScript** - Type safety across the entire codebase
+
 
 ## Prerequisites
 
