@@ -19,7 +19,7 @@
 	"githubIssues.issueCompletionFormatScm": "${issueTitle} ${issueNumberLabel}",
 	"githubIssues.issueBranchTitle": "${issueNumber}-${sanitizedLowercaseIssueTitle}",
 	"githubIssues.useBranchForIssues": "on",
-	"githubIssues.workingIssueFormatScm": "Feature branch initial commit",
+	"githubIssues.workingIssueFormatScm": "Resolves #${issueNumberLabel} ${issueTitle}",
 	"githubIssues.queries": [
 		{
 			"label": "My Issues",
