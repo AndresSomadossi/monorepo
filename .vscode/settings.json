@@ -15,6 +15,11 @@
 	"git.confirmSync": false,
 	"git.enableSmartCommit": true,
 	"githubPullRequests.pushBranch": "always",
+	"githubPullRequests.createDefaultBaseBranch": "repositoryDefault",
+	"githubIssues.issueCompletionFormatScm": "${issueTitle} ${issueNumberLabel}",
+	"githubIssues.issueBranchTitle": "${issueNumber}-${sanitizedLowercaseIssueTitle}",
+	"githubIssues.useBranchForIssues": "on",
+	"githubIssues.workingIssueFormatScm": "Feature branch initial commit",
 	"githubIssues.queries": [
 		{
 			"label": "My Issues",
@@ -26,8 +31,5 @@
 			"query": "repo:${owner}/${repository} state:open milestone:* sort:created-desc",
 			"groupBy": ["milestone"]
 		}
-	],
-	"githubIssues.issueCompletionFormatScm": "${issueTitle} ${issueNumberLabel}",
-	"githubIssues.issueBranchTitle": "${issueNumber}-${sanitizedIssueTitle}",
-	"githubIssues.workingIssueFormatScm": "Feature branch initial commit"
+	]
 }
