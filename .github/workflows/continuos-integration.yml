@@ -9,6 +9,10 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+permissions:
+  pull-requests: write
+  contents: write
+
 jobs:
   validate-issue:
     runs-on: ubuntu-latest
@@ -55,12 +59,13 @@ jobs:
         run: |
           # Get the pull request number from the event payload.
           PR_NUMBER=${{ github.event.pull_request.number }}
-          echo "Enabling auto merge for PR #$PR_NUMBER with commit title: ${{ steps.extract.outputs.issue_title }}"
-          curl -X PUT \
+          ISSUE_TITLE="${{ steps.extract.outputs.issue_title }}"
+          echo "Enabling auto merge for PR #$PR_NUMBER with commit title: $ISSUE_TITLE"
+          gh api --method PUT \
             -H "Accept: application/vnd.github+json" \
-            -H "Authorization: token $GITHUB_TOKEN" \
-            "https://api.github.com/repos/${{ github.repository }}/pulls/$PR_NUMBER/auto-merge" \
-            -d '{"merge_method": "squash", "commit_title": "'"${{ steps.extract.outputs.issue_title }}"'"}'
+            repos/${{ github.repository }}/pulls/$PR_NUMBER/auto-merge \
+            -f merge_method=squash \
+            -f commit_title="$ISSUE_TITLE"
 
   ci-checks:
     runs-on: ubuntu-latest
