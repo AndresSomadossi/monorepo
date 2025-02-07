@@ -24,12 +24,10 @@ A modern monorepo setup using Typescript, Turborepo and pnpm workspaces
 
 - 🏎️ **Turborepo** - High-performance build system
 - 📦 **pnpm** - Fast, disk space efficient package manager
-- ⚛️ **React** - Frontend framework
-- 🎨 **TailwindCSS** - Utility-first CSS framework
-- 🔧 **TypeScript** - Type safety across the entire codebase
-- 📱 **RSBuild** - Modern build tool for React applications
 - 🔍 **Biome** - Fast linter and formatter
 - 🔄 **Changesets** - Versioning and changelog management
+- 🔧 **TypeScript** - Type safety across the entire codebase
+
 
 ## Prerequisites
 
