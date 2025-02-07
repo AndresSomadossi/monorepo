@@ -60,7 +60,7 @@ jobs:
           # Get the pull request number from the event payload.
           PR_NUMBER=${{ github.event.pull_request.number }}
           echo "Enabling auto merge for PR #$PR_NUMBER with commit title: ${{ steps.extract.outputs.issue_title }}"
-          gh pr merge  --auto -d --squash -t "${{ steps.extract.outputs.issue_title }}"
+          gh pr merge $PR_NUMBER --auto -d --squash -t "${{ steps.extract.outputs.issue_title }}"
 
   ci-checks:
     runs-on: ubuntu-latest
