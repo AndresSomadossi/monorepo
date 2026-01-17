@@ -53,16 +53,6 @@ jobs:
           echo "✅ Issue title: $ISSUE_TITLE"
           echo "issue_title=$ISSUE_TITLE" >> "$GITHUB_OUTPUT"
 
-      - name: Enable Auto Merge
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          # Get the pull request number from the event payload.
-          PR_NUMBER=${{ github.event.pull_request.number }}
-          echo "Enabling auto merge for PR #$PR_NUMBER"
-          gh pr merge --repo ${{ github.repository }} $PR_NUMBER --auto -d --squash
-          echo "✅ Auto-merge enabled: $PR_NUMBER"
-
   ci-checks:
     runs-on: ubuntu-latest
     env:
@@ -114,16 +104,34 @@ jobs:
           TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
           TURBO_TEAM: ${{ vars.TURBO_TEAM }}
 
-  staging-deploy:
+  ephemeral-deploy-confirmation:
     runs-on: ubuntu-latest
     needs: ephemeral-deploy
     environment:
-      name: staging
-      url: https://staging.example.com  
+      name: ephemeral
     steps:
-      - uses: actions/checkout@v4
-      - uses: ./.github/workflows/deploy
-        with:
-          target: staging
-          TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
-          TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+      - name: Enable Auto Merge
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Get the pull request number from the event payload.
+          PR_NUMBER=${{ github.event.pull_request.number }}
+          echo "Enabling auto merge for PR #$PR_NUMBER"
+          gh pr merge --repo ${{ github.repository }} $PR_NUMBER --auto -d --squash
+          echo "✅ Auto-merge enabled: $PR_NUMBER"
+
+
+
+  # staging-deploy:
+  #   runs-on: ubuntu-latest
+  #   needs: ephemeral-deploy
+  #   environment:
+  #     name: staging
+  #     url: https://staging.example.com  
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - uses: ./.github/workflows/deploy
+  #       with:
+  #         target: staging
+  #         TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+  #         TURBO_TEAM: ${{ vars.TURBO_TEAM }}
