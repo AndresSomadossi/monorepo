@@ -47,6 +47,13 @@
 			"js-yaml@>=4.0.0 <4.1.1": ">=4.1.1",
 			"glob@>=10.2.0 <10.5.0": ">=10.5.0",
 			"diff@<8.0.3": ">=8.0.3"
-		}
+		},
+		"onlyBuiltDependencies": [
+			"@biomejs/biome",
+			"aws-sdk",
+			"core-js",
+			"core-js-pure",
+			"esbuild"
+		]
 	}
 }
