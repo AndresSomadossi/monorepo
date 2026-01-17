@@ -1,0 +1,5 @@
+blank: false
+contact_links:
+  - name: Question
+    url: https://github.com/AndresSomadossi/monorepo/discussions
+    about: Ask questions and discuss with the community
