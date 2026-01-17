@@ -1,4 +1,5 @@
 name: Deploy Workflow
+description: Deploy application to target environment
 
 inputs:
   target:

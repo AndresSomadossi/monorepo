@@ -22,7 +22,7 @@
 	"githubIssues.workingIssueFormatScm": "Resolves ${issueNumberLabel} ${issueTitle}",
 	"githubPullRequests.pullPullRequestBranchBeforeCheckout": "pullAndMergeBase",
 	"githubPullRequests.pullBranch": "always",
-	"githubPullRequests.pullRequestDescription": "Copilot",
+	"githubPullRequests.pullRequestDescription": "template",
 	"githubIssues.queries": [
 		{
 			"label": "My Issues",
